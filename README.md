@@ -1,18 +1,18 @@
-# Welcome to your Lovable project
+# Clarity App
 
 ## Project info
 
-**URL**: https://lovable.dev/projects/7ad5ee7a-3cf6-476e-96c8-b8680d434c12
+Local development and deployment instructions.
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
+Environment variables required (see env.example):
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7ad5ee7a-3cf6-476e-96c8-b8680d434c12) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
+- VITE_SUPABASE_URL
+- VITE_SUPABASE_PUBLISHABLE_KEY
+- VITE_WORKOS_CLIENT_ID
 
 **Use your preferred IDE**
 
@@ -62,7 +62,7 @@ This project is built with:
 
 ## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/7ad5ee7a-3cf6-476e-96c8-b8680d434c12) and click on Share -> Publish.
+Build with `npm run build` and deploy the `dist` folder (Vercel static build).
 
 ## Can I connect a custom domain to my Lovable project?
 

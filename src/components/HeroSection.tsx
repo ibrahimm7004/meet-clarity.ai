@@ -64,11 +64,26 @@ const HeroSection = () => {
       <div className="container mx-auto">
         {/* Hero Content */}
         <div className="text-center mb-14 md:mb-20 max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold mb-6 md:mb-8 text-foreground leading-tight tracking-tight">
-            <span className="block animate-fade-up" style={{ animationDelay: '0ms' }}>CHEAT ON EVERY MEETING</span>
-            <br />
-            <span className="animate-fade-up" style={{ animationDelay: '120ms' }}>
-              WITH <span className="bg-gradient-to-r from-[#1E5AFF] to-[#00B3FF] bg-clip-text text-transparent bg-[length:200%_100%] animate-shimmer">CLARITY</span>
+          <h1 className="text-center leading-[1.1] tracking-tight text-foreground mb-6 md:mb-8">
+            <span
+              className="block animate-fade-up font-bold text-[4rem] md:text-[4.5rem]"
+              style={{ animationDelay: '0ms', animationDuration: '1000ms' }}
+            >
+              CHEAT ON EVERY
+            </span>
+            <span
+              className="block animate-fade-up font-bold text-[4rem] md:text-[4.5rem] mt-1"
+              style={{ animationDelay: '120ms', animationDuration: '1000ms' }}
+            >
+              MEETING WITH
+            </span>
+            <span
+              className="block animate-fade-up mt-1"
+              style={{ animationDelay: '320ms', animationDuration: '1000ms' }}
+            >
+              <span className="font-extrabold bg-gradient-to-r from-[#1E5AFF] to-[#00B3FF] bg-clip-text text-transparent drop-shadow-[0_2px_6px_rgba(30,90,255,0.2)] bg-[length:200%_100%] animate-[shimmer_5s_linear_infinite] text-[4.25rem] md:text-[5.5rem] transition-opacity duration-[1200ms]">
+                CLARITY
+              </span>
             </span>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-[#444A52] leading-8 mb-8 md:mb-10 max-w-3xl mx-auto px-4 animate-fade-up" style={{ animationDelay: '220ms' }}>

@@ -7,6 +7,10 @@ import { useToast } from "@/hooks/use-toast";
 import { Loader2 } from "lucide-react";
 
 const WORKOS_CLIENT_ID = import.meta.env.VITE_WORKOS_CLIENT_ID;
+if (!WORKOS_CLIENT_ID) {
+  // eslint-disable-next-line no-console
+  console.warn('VITE_WORKOS_CLIENT_ID is not set. SSO will not work in production.');
+}
 const WORKOS_REDIRECT_URI = `${window.location.origin}/auth/callback`;
 
 // PKCE helpers
