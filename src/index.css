@@ -86,9 +86,9 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    background-color: var(--color-bg);
-    background-image: var(--gradient-background);
+    @apply text-foreground font-sans antialiased;
+    /* Remove solid background color and gradient image */
+    background: transparent;
   }
   
   /* Custom scrollbar */
@@ -203,5 +203,35 @@ All colors MUST be HSL.
   @keyframes blink {
     0%, 50% { border-color: transparent; }
     51%, 100% { border-color: hsl(270 91% 65%); }
+  }
+  /* Enhanced organic motion for ambient blobs */
+  @keyframes floatDrift {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    25% { transform: translate3d(40px, -30px, 0) scale(1.05); }
+    50% { transform: translate3d(-30px, 40px, 0) scale(1.1); }
+    75% { transform: translate3d(-20px, -25px, 0) scale(0.95); }
+  }
+  @keyframes floatDrift2 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    25% { transform: translate3d(-35px, 15px, 0) scale(1.08); }
+    50% { transform: translate3d(20px, -30px, 0) scale(0.92); }
+    75% { transform: translate3d(15px, 20px, 0) scale(1.03); }
+  }
+  @keyframes floatDrift3 {
+    0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+    25% { transform: translate3d(25px, 35px, 0) scale(0.98); }
+    50% { transform: translate3d(-40px, -10px, 0) scale(1.12); }
+    75% { transform: translate3d(-5px, -25px, 0) scale(1.02); }
+  }
+  /* Interactive dart reaction */
+  @keyframes dartAway {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(120px, -80px, 0) scale(1.1); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes dartAwayAlt {
+    0% { transform: translate3d(0, 0, 0) scale(1); }
+    50% { transform: translate3d(-100px, 90px, 0) scale(1.15); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
   }
 }
