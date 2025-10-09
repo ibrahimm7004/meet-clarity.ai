@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import clarityLogo from "/favicon.png";
 
 import { useEffect, useState } from "react";
+import { scrollToSection, applyHashOffsetOnLoad } from "@/lib/scrollToSection";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -13,13 +14,19 @@ const Header = () => {
       setScrolled(window.scrollY > 40);
     };
     window.addEventListener("scroll", onScroll);
+    applyHashOffsetOnLoad();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const signUpHref = "/auth?mode=signup";
 
+  const onNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    scrollToSection(id, { updateHash: true });
+  };
+
   return (
-    <header className="sticky top-4 z-50 px-4">
+    <header data-site-header className="sticky top-4 z-50 px-4">
       <div
         className={`container mx-auto transition-all duration-300 ${
           scrolled ? "py-2" : "py-4"
@@ -49,20 +56,23 @@ const Header = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6">
-              <Link 
-                to="/"
+              <a 
+                href="#home"
+                onClick={(e) => onNavClick(e, 'home')}
                 className="text-foreground hover:text-foreground transition-colors font-medium"
               >
                 Home
-              </Link>
+              </a>
               <a 
                 href="#pricing"
+                onClick={(e) => onNavClick(e, 'pricing')}
                 className="text-foreground hover:text-foreground transition-colors font-medium"
               >
                 Pricing
               </a>
               <a 
                 href="#contact"
+                onClick={(e) => onNavClick(e, 'contact')}
                 className="text-foreground hover:text-foreground transition-colors font-medium"
               >
                 Contact
@@ -84,12 +94,14 @@ const Header = () => {
             <div className="md:hidden flex items-center gap-3">
               <a 
                 href="#pricing"
+                onClick={(e) => onNavClick(e, 'pricing')}
                 className="text-foreground text-sm"
               >
                 Pricing
               </a>
               <a 
                 href="#contact"
+                onClick={(e) => onNavClick(e, 'contact')}
                 className="text-foreground text-sm"
               >
                 Contact

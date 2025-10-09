@@ -143,7 +143,7 @@ const HeroSection = () => {
 
   // ---- UI ----
   return (
-    <section className="relative py-16 md:py-24 px-4 overflow-hidden bg-[#F8F9FB]">
+    <section id="home" className="relative py-16 md:py-24 px-4 overflow-hidden bg-[#F8F9FB]">
       {/* Interactive glowing canvas */}
       <canvas
         ref={canvasRef}
