@@ -38,9 +38,17 @@ const Header = () => {
         }`}
       >
         <div
-          className={`rounded-xl backdrop-blur-md border shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-all duration-300 ${
-            scrolled ? "bg-white border-gray-200" : "bg-white/80 border-gray-200"
+          className={`rounded-xl border transition-all duration-300 backdrop-blur-[7px] ${
+            scrolled
+              ? "border-[var(--color-border)]"
+              : "border-[var(--color-border)]"
           }`}
+          style={{
+            background: "rgba(255,255,255,0.40)",
+            boxShadow: scrolled
+              ? "0 12px 32px rgba(0,0,0,0.13)"
+              : "0 10px 28px rgba(0,0,0,0.12)",
+          }}
         >
           <div className="flex items-center justify-between px-4 md:px-6 py-3">
             {/* Logo */}
@@ -55,31 +63,31 @@ const Header = () => {
             <nav className="hidden md:flex items-center gap-6">
               <a 
                 href="#features"
-                className="text-foreground/80 hover:text-foreground transition-colors font-medium"
+                className="text-foreground hover:text-foreground transition-colors font-medium"
               >
                 Features
               </a>
               <a 
                 href="#extension"
-                className="text-foreground/80 hover:text-foreground transition-colors font-medium"
+                className="text-foreground hover:text-foreground transition-colors font-medium"
               >
                 Extension
               </a>
               <a 
                 href="#pricing"
-                className="text-foreground/80 hover:text-foreground transition-colors font-medium"
+                className="text-foreground hover:text-foreground transition-colors font-medium"
               >
                 Pricing
               </a>
               <Link 
                 to="/enterprise"
-                className="text-foreground/80 hover:text-foreground transition-colors font-medium"
+                className="text-foreground hover:text-foreground transition-colors font-medium"
               >
                 Enterprise
               </Link>
               <a 
                 href="#contact"
-                className="text-foreground/80 hover:text-foreground transition-colors font-medium"
+                className="text-foreground hover:text-foreground transition-colors font-medium"
               >
                 Contact
               </a>

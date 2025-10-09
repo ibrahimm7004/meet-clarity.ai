@@ -1,0 +1,13 @@
+:root {
+  /* Brand color tokens */
+  --color-primary: #1E5AFF;
+  --color-primary-hover: #0047D1;
+  --color-accent: #00B3FF;
+  --color-bg: #F8F9FB;
+  --color-text: #0F1115;
+  --color-muted: #666F7A;
+  --color-surface: #FFFFFF;
+  --color-border: rgba(0, 0, 0, 0.08);
+}
+
+

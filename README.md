@@ -8,11 +8,13 @@ Local development and deployment instructions.
 
 There are several ways of editing your application.
 
-Environment variables required (see env.example):
+Environment variables required (see `.env.example`):
 
 - VITE_SUPABASE_URL
 - VITE_SUPABASE_PUBLISHABLE_KEY
 - VITE_WORKOS_CLIENT_ID
+
+See `docs/dev-config.md` for details and optional flags.
 
 **Use your preferred IDE**
 

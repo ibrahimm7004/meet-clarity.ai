@@ -5,26 +5,60 @@ import type { Database } from './types';
 const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
 
-if (!SUPABASE_URL || !SUPABASE_PUBLISHABLE_KEY) {
-  // Warn in production too; avoid throwing to prevent white screen
-  // Consumers should ensure env variables are configured on Vercel
+// Import the supabase client like this:
+// import { supabase } from "@/integrations/supabase/client";
+
+type MinimalSubscription = { unsubscribe: () => void };
+type MinimalAuth = {
+  getSession: () => Promise<{ data: { session: null }, error: null }>;
+  onAuthStateChange: (
+    cb: (event: unknown, session: unknown) => void
+  ) => { data: { subscription: MinimalSubscription } };
+  signOut: () => Promise<void>;
+};
+
+type MinimalSupabase = {
+  auth: MinimalAuth;
+};
+
+function createFallbackSupabase(): MinimalSupabase {
   // eslint-disable-next-line no-console
   console.warn(
     'Supabase env vars are missing. Please set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY.'
   );
+  const noop = () => {};
+  return {
+    auth: {
+      async getSession() {
+        return { data: { session: null }, error: null };
+      },
+      onAuthStateChange() {
+        return { data: { subscription: { unsubscribe: noop } } };
+      },
+      async signOut() {
+        // no-op in fallback
+      },
+    },
+  };
 }
 
-// Import the supabase client like this:
-// import { supabase } from "@/integrations/supabase/client";
+function canInitializeSupabase(url: unknown, key: unknown): url is string {
+  return (
+    typeof url === 'string' &&
+    url.length > 0 &&
+    /^https?:\/\//i.test(url) &&
+    typeof key === 'string' &&
+    key.length > 0
+  );
+}
 
-export const supabase = createClient<Database>(
-  SUPABASE_URL || '',
-  SUPABASE_PUBLISHABLE_KEY || '',
-  {
-    auth: {
-      storage: localStorage,
-      persistSession: true,
-      autoRefreshToken: true,
-    }
-  }
-);
+export const supabase: MinimalSupabase | ReturnType<typeof createClient<Database>> =
+  canInitializeSupabase(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY)
+    ? createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+        auth: {
+          storage: localStorage,
+          persistSession: true,
+          autoRefreshToken: true,
+        },
+      })
+    : createFallbackSupabase();
