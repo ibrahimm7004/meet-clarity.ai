@@ -1,25 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { User, LogOut } from "lucide-react";
 import clarityLogo from "/favicon.png";
 
 import { useEffect, useState } from "react";
 
 const Header = () => {
-  const { user, signOut } = useAuth();
   const navigate = useNavigate();
-
-  const handleSignOut = async () => {
-    await signOut();
-    navigate("/");
-  };
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -29,6 +15,8 @@ const Header = () => {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const signUpHref = "/auth?mode=signup";
 
   return (
     <header className="sticky top-4 z-50 px-4">
@@ -61,30 +49,18 @@ const Header = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6">
-              <a 
-                href="#features"
+              <Link 
+                to="/"
                 className="text-foreground hover:text-foreground transition-colors font-medium"
               >
-                Features
-              </a>
-              <a 
-                href="#extension"
-                className="text-foreground hover:text-foreground transition-colors font-medium"
-              >
-                Extension
-              </a>
+                Home
+              </Link>
               <a 
                 href="#pricing"
                 className="text-foreground hover:text-foreground transition-colors font-medium"
               >
                 Pricing
               </a>
-              <Link 
-                to="/enterprise"
-                className="text-foreground hover:text-foreground transition-colors font-medium"
-              >
-                Enterprise
-              </Link>
               <a 
                 href="#contact"
                 className="text-foreground hover:text-foreground transition-colors font-medium"
@@ -95,54 +71,36 @@ const Header = () => {
 
             {/* CTA Button */}
             <div className="hidden md:block">
-              {user ? (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="rounded-full">
-                      <User className="h-5 w-5" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={handleSignOut}>
-                      <LogOut className="mr-2 h-4 w-4" />
-                      Sign out
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <Button 
-                  onClick={() => navigate("/auth")}
-                  className="bg-black text-white rounded-full px-5 py-2 transition-transform duration-200 hover:-translate-y-[2px] hover:shadow-[0_6px_18px_rgba(30,90,255,0.15)]"
-                >
-                  Sign In
-                </Button>
-              )}
+              <Button 
+                onClick={() => navigate(signUpHref)}
+                className="rounded-full px-5 py-2 bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white"
+                aria-label="Create account"
+              >
+                Sign Up
+              </Button>
             </div>
 
             {/* Mobile Navigation */}
-            <div className="md:hidden">
-              {user ? (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="rounded-full">
-                      <User className="h-5 w-5" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={handleSignOut}>
-                      <LogOut className="mr-2 h-4 w-4" />
-                      Sign out
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <Button 
-                  onClick={() => navigate("/auth")}
-                  className="bg-black text-white rounded-full px-4 text-sm transition-transform duration-200 hover:-translate-y-[2px] hover:shadow-[0_6px_18px_rgba(30,90,255,0.15)]"
-                >
-                  Sign In
-                </Button>
-              )}
+            <div className="md:hidden flex items-center gap-3">
+              <a 
+                href="#pricing"
+                className="text-foreground text-sm"
+              >
+                Pricing
+              </a>
+              <a 
+                href="#contact"
+                className="text-foreground text-sm"
+              >
+                Contact
+              </a>
+              <Button 
+                onClick={() => navigate(signUpHref)}
+                className="rounded-full px-4 text-sm bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white"
+                aria-label="Create account"
+              >
+                Sign Up
+              </Button>
             </div>
           </div>
         </div>

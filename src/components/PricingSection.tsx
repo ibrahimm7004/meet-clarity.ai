@@ -3,8 +3,6 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
   Check, 
-  Star, 
-  Zap, 
   Crown,
   Shield
 } from "lucide-react";
@@ -13,9 +11,9 @@ const PricingSection = () => {
   const plans = [
     {
       name: "Free",
-      icon: Zap,
+      icon: () => <span className="text-primary font-bold">F</span>,
       price: { monthly: 0, annual: 0 },
-      description: "Essential tools for interview preparation",
+      description: "Practice and try Clarity without automation.",
       badge: "Get Started",
       features: [
         "Automated note-taking during interviews/meetings",
@@ -23,39 +21,39 @@ const PricingSection = () => {
         "Basic interview performance insights",
         "Follow-up email summaries",
         "Email support",
-        "5 interviews per month limit"
+        "5 interviews per month limit",
       ],
       notIncluded: [
         "Real-time AI answers",
-        "Advanced interview analysis", 
+        "Advanced interview analysis",
         "Unlimited interviews",
-        "Priority support"
-      ]
+        "Priority support",
+      ],
+      footnote: "No credit card required.",
     },
     {
-      name: "Pro", 
+      name: "Pro",
       icon: Crown,
       price: { monthly: 24.99, annual: 250 },
-      description: "Everything you need to ace interviews & succeed at work",
+      description: "Everything you need to ace interviews & succeed at work.",
       badge: "Best Value",
       popular: true,
       features: [
         "Everything in Free Plan",
-        "Real-time Clarity answer search (0.3s response)",
-        "Advanced interview analysis & scoring", 
+        "Real-time Clarity answers (0.3s response)",
+        "Advanced interview analysis & scoring",
         "Acceptance probability prediction",
         "CV-interview compatibility analysis",
         "Meeting action items & timelines",
         "Advanced question bank (1000+ questions)",
         "Industry-specific optimization",
-        "Post-job meeting summaries & task scheduling",
-        "Automated work timeline management",
         "Follow-up email automation with action items",
         "Priority support",
-        "Unlimited interviews"
+        "Unlimited interviews",
       ],
-      notIncluded: []
-    }
+      notIncluded: [],
+      footnote: "Cancel anytime.",
+    },
   ];
 
   const savings = (monthly: number, annual: number) => {
@@ -76,26 +74,18 @@ const PricingSection = () => {
             Choose Your Success Plan
           </h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-6 md:mb-8 px-4">
-            Start with a 7-day free trial. No credit card required. 
-            Cancel anytime with just one click. Continue with us after getting the job 
-            for ongoing meeting management and task scheduling.
+            Start free and upgrade when you’re ready. No trial. No surprises.
           </p>
-          
-          {/* Free Trial Highlight */}
-          <div className="inline-flex items-center space-x-2 bg-success/10 border border-success/20 rounded-full px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base">
-            <Star className="w-4 h-4 sm:w-5 sm:h-5 text-success flex-shrink-0" />
-            <span className="text-success font-medium">7-Day Free Trial • No Credit Card Required</span>
-          </div>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-6 max-w-5xl mx-auto items-stretch">
           {plans.map((plan, index) => {
             const annualSavings = savings(plan.price.monthly, plan.price.annual);
-            
+
             return (
               <Card 
                 key={index} 
-                className={`p-4 sm:p-5 md:p-6 relative overflow-hidden ${
+                className={`p-4 sm:p-5 md:p-6 relative overflow-hidden flex flex-col ${
                   plan.popular 
                     ? 'border-2 border-primary bg-card glow-primary' 
                     : 'border-border bg-card/50'
@@ -106,17 +96,13 @@ const PricingSection = () => {
                     {plan.badge}
                   </div>
                 )}
-                
-                <div className={`space-y-4 ${plan.popular ? 'pt-6' : ''}`}>
+
+                <div className={`space-y-4 ${plan.popular ? 'pt-6' : ''} flex-1 flex flex-col`}>
                   {/* Plan Header */}
                   <div className="text-center space-y-3">
                     <div className="flex items-center justify-center space-x-2">
-                      <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
-                        plan.popular 
-                          ? 'bg-gradient-primary text-primary-foreground' 
-                          : 'bg-muted text-muted-foreground'
-                      }`}>
-                        <plan.icon className="w-5 h-5" />
+                      <div className={`${plan.popular ? 'bg-gradient-primary text-primary-foreground' : 'bg-muted text-muted-foreground'} w-10 h-10 rounded-lg flex items-center justify-center`}>
+                        {typeof plan.icon === 'function' ? plan.icon() : <plan.icon className="w-5 h-5" />}
                       </div>
                       <div>
                         <h3 className="text-xl font-bold">{plan.name}</h3>
@@ -127,7 +113,7 @@ const PricingSection = () => {
                         )}
                       </div>
                     </div>
-                    <p className="text-muted-foreground text-sm">{plan.description}</p>
+                    <p className="text-muted-foreground text-sm max-w-sm mx-auto">{plan.description}</p>
                   </div>
 
                   {/* Pricing */}
@@ -135,27 +121,18 @@ const PricingSection = () => {
                     {plan.name === "Free" ? (
                       <div className="space-y-1">
                         <div className="flex items-baseline justify-center space-x-1">
-                          <span className="text-3xl font-bold text-foreground">
-                            Free
-                          </span>
+                          <span className="text-3xl font-bold text-foreground">Free</span>
                         </div>
-                        <div className="text-xs text-muted-foreground">
-                          Always free
-                        </div>
+                        <div className="text-xs text-muted-foreground">Always free</div>
                       </div>
                     ) : (
                       <div className="space-y-1">
                         <div className="flex items-baseline justify-center space-x-1">
-                          <span className="text-3xl font-bold text-foreground">
-                            ${plan.price.monthly}
-                          </span>
+                          <span className="text-3xl font-bold text-foreground">${plan.price.monthly}</span>
                           <span className="text-muted-foreground text-sm">/month</span>
                         </div>
                         <div className="text-xs text-muted-foreground">
-                          or ${plan.price.annual}/year{" "}
-                          <Badge variant="outline" className="text-xs text-success border-success/50">
-                            Save {annualSavings.percentage}%
-                          </Badge>
+                          or ${plan.price.annual}/year <Badge variant="outline" className="text-xs">Save {annualSavings.percentage}%</Badge>
                         </div>
                       </div>
                     )}
@@ -165,19 +142,19 @@ const PricingSection = () => {
                   <div className="space-y-3">
                     <h4 className="font-semibold text-center text-sm">What's included:</h4>
                     <ul className="space-y-2">
-                      {plan.features.map((feature, featureIndex) => (
+                      {plan.features.map((feature: string, featureIndex: number) => (
                         <li key={featureIndex} className="flex items-start space-x-2">
-                          <Check className="w-4 h-4 text-success flex-shrink-0 mt-0.5" />
+                          <Check className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                           <span className="text-xs">{feature}</span>
                         </li>
                       ))}
                     </ul>
-                    
+
                     {plan.notIncluded.length > 0 && (
                       <div className="pt-3 border-t border-border/50">
                         <ul className="space-y-1">
-                          {plan.notIncluded.slice(0, 3).map((feature, featureIndex) => (
-                            <li key={featureIndex} className="flex items-start space-x-2 opacity-50">
+                          {plan.notIncluded.slice(0, 3).map((feature: string, featureIndex: number) => (
+                            <li key={featureIndex} className="flex items-start space-x-2 opacity-60">
                               <div className="w-4 h-4 border border-muted-foreground/30 rounded-full flex-shrink-0 mt-0.5"></div>
                               <span className="text-xs text-muted-foreground">{feature}</span>
                             </li>
@@ -187,17 +164,17 @@ const PricingSection = () => {
                     )}
                   </div>
 
-                  {/* Free Trial & CTA */}
+                  {/* Spacer to push CTA to bottom */}
+                  <div className="flex-1" />
+
+                  {/* CTA Row */}
                   <div className="space-y-2 pt-2">
-                    <p className="text-xs text-muted-foreground text-center h-[20px]">
-                      {plan.name !== "Free" ? "7-Day Free Trial" : " "}
-                    </p>
-                    <Button 
-                      className="w-full"
-                      size="lg"
-                    >
+                    <Button className="w-full" size="lg">
                       {plan.name === "Free" ? "Download Now" : "Subscribe Now"}
                     </Button>
+                    <p className="text-xs text-muted-foreground text-center">
+                      {plan.footnote}
+                    </p>
                   </div>
                 </div>
               </Card>
@@ -205,7 +182,7 @@ const PricingSection = () => {
           })}
         </div>
 
-        {/* Money Back Guarantee */}
+        {/* Guarantee */}
         <div className="text-center mt-8 md:mt-12">
           <div className="inline-flex items-center space-x-2 text-muted-foreground text-sm sm:text-base">
             <Shield className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
@@ -218,24 +195,21 @@ const PricingSection = () => {
           <h3 className="text-xl sm:text-2xl font-bold text-center mb-6 md:mb-8 px-4">Frequently Asked Questions</h3>
           <div className="grid gap-4 sm:gap-6">
             <Card className="p-4 sm:p-5 md:p-6">
-              <h4 className="font-semibold mb-2 text-sm sm:text-base">What happens after the free trial?</h4>
+              <h4 className="font-semibold mb-2 text-sm sm:text-base">Is there a free trial?</h4>
               <p className="text-muted-foreground text-xs sm:text-sm">
-                Your free trial gives you full access to all Pro features for 7 days. 
-                You can cancel anytime during the trial with no charges.
+                No. Start on Free and upgrade to Pro whenever you’re ready.
               </p>
             </Card>
             <Card className="p-6">
               <h4 className="font-semibold mb-2">Can I switch between plans?</h4>
               <p className="text-muted-foreground text-sm">
-                Yes! You can upgrade or downgrade your plan at any time. 
-                Changes take effect immediately with prorated billing.
+                Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately with prorated billing.
               </p>
             </Card>
             <Card className="p-6">
               <h4 className="font-semibold mb-2">Is my interview data secure?</h4>
               <p className="text-muted-foreground text-sm">
-                Absolutely. We use enterprise-grade encryption and never store 
-                personal interview content. Your privacy is our top priority.
+                Absolutely. We use enterprise-grade encryption and never store personal interview content. Your privacy is our top priority.
               </p>
             </Card>
           </div>
