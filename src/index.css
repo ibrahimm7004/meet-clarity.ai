@@ -144,6 +144,27 @@ All colors MUST be HSL.
     animation: fade-in 1s ease-out;
   }
 
+  /* Hero headline entrance (attribute-driven to avoid purge issues) */
+  h1[data-hero] .hero-line {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  h1[data-hero="play"] .hero-line {
+    animation-name: hero-line-in;
+    animation-duration: 380ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    animation-fill-mode: forwards;
+    will-change: transform, opacity;
+  }
+  h1[data-hero="done"] .hero-line {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  h1[data-hero] .hero-line.i-1 { animation-delay: 0ms; }
+  h1[data-hero] .hero-line.i-2 { animation-delay: 90ms; }
+  h1[data-hero] .hero-line.i-3 { animation-delay: 180ms; }
+  h1[data-hero] .hero-line.i-4 { animation-delay: 270ms; }
+
   /* Animation delays */
   .delay-75 {
     animation-delay: 75ms;
@@ -193,6 +214,17 @@ All colors MUST be HSL.
   @keyframes fade-in {
     0% { opacity: 0; }
     100% { opacity: 1; }
+  }
+
+  @keyframes hero-line-in {
+    0% {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   
   @keyframes typing {

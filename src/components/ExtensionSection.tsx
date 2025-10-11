@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Download, Chrome, Check } from "lucide-react";
-import DownloadModal from "./DownloadModal";
+import { downloadExtensionZip } from "@/utils/downloadExtensionZip";
 
 const ExtensionSection = () => {
-  const [showModal, setShowModal] = useState(false);
 
   const features = [
     {
@@ -104,15 +102,35 @@ const ExtensionSection = () => {
 
             <Button 
               className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full py-6 text-lg font-semibold"
-              onClick={() => setShowModal(true)}
+              onClick={() => {
+                // Unified CTA behavior (Option A): direct download of latest developer .zip
+                void downloadExtensionZip();
+              }}
             >
               <Download className="w-5 h-5 mr-2" />
               Download Extension
             </Button>
 
-            <p className="text-xs text-center text-muted-foreground mt-4">
+          <p className="text-xs text-center text-muted-foreground mt-4">
               Compatible with Chrome, Brave, Edge, and other Chromium-based browsers
             </p>
+
+          <div className="mt-3 text-center text-xs text-muted-foreground">
+            {/* Non-modal alternatives formerly in modal: guide download and early access */}
+            <a
+              href="/extension/README.md"
+              download
+              className="text-primary hover:underline font-medium mr-3"
+            >
+              Download Installation Guide
+            </a>
+            <a
+              href="mailto:support@clarity-interview.app?subject=Early%20Access%20Request%20-%20Clarity%20Extension"
+              className="text-primary hover:underline font-medium"
+            >
+              Request Early Access
+            </a>
+          </div>
           </div>
         </div>
 
@@ -131,9 +149,7 @@ const ExtensionSection = () => {
           ))}
         </div>
       </div>
-
-      {/* Download Modal */}
-      <DownloadModal isOpen={showModal} onClose={() => setShowModal(false)} />
+      {/* Modal removed: CTAs now perform direct download (no pop-ups) */}
     </section>
   );
 };

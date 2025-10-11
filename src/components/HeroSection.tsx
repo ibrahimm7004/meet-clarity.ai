@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Download, Chrome } from "lucide-react";
-import DownloadModal from "./DownloadModal";
+import { Chrome } from "lucide-react";
+import { downloadExtensionZip } from "@/utils/downloadExtensionZip";
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [showDownloadModal, setShowDownloadModal] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const didPlayRef = useRef(false);
 
   const slides = [
     {
@@ -141,6 +141,41 @@ const HeroSection = () => {
     };
   }, []);
 
+  // ---- Headline entrance animation (once per page load, no persistence) ----
+  const url = new URL(window.location.href);
+  const playOverride = url.searchParams.get('playHero') === '1';
+  const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const [heroAttr, setHeroAttr] = useState<'ready' | 'play' | 'done'>(!playOverride && prefersReduced ? 'done' : 'ready');
+
+  useEffect(() => {
+    // Optional cleanup of old keys from earlier implementations (no persistence used now)
+    try { sessionStorage.removeItem('heroTextAnimated_v1'); } catch {}
+  }, []);
+
+  useEffect(() => {
+    // Skip if reduced-motion (unless dev override) or if we've already played in this render
+    if (!playOverride && prefersReduced) {
+      setHeroAttr('done');
+      return;
+    }
+    if (didPlayRef.current) {
+      setHeroAttr('done');
+      return;
+    }
+    setHeroAttr('ready');
+    const rafId = requestAnimationFrame(() => {
+      setHeroAttr('play');
+      const toId = window.setTimeout(() => {
+        setHeroAttr('done');
+        didPlayRef.current = true;
+      }, 800);
+      // cleanup timeout on unmount
+      return () => window.clearTimeout(toId);
+    });
+    return () => cancelAnimationFrame(rafId);
+  }, [playOverride, prefersReduced]);
+
   // ---- UI ----
   return (
     <section id="home" className="relative py-16 md:py-24 px-4 overflow-hidden bg-[#F8F9FB]">
@@ -163,14 +198,17 @@ const HeroSection = () => {
 
       {/* Hero content */}
       <div className="container mx-auto text-center max-w-4xl relative z-10">
-        <h1 className="leading-[1.1] tracking-tight mb-8">
-          <span className="block font-bold text-[4.2rem] md:text-[5rem]">
+        <h1 className="leading-[1.1] tracking-tight mb-8" data-hero={heroAttr}>
+          <span className="hero-line i-1 block font-bold text-[4.2rem] md:text-[5rem]">
             CHEAT ON EVERY
           </span>
-          <span className="block font-bold text-[4.2rem] md:text-[5rem] mt-1">
-            MEETING WITH
+          <span className="hero-line i-2 block font-bold text-[4.2rem] md:text-[5rem] mt-1">
+            MEETING
           </span>
-          <span className="block mt-2 font-extrabold bg-gradient-to-r from-[#1E5AFF] to-[#00B3FF] bg-clip-text text-transparent text-[5rem] md:text-[6rem] drop-shadow-[0_2px_6px_rgba(30,90,255,0.2)]">
+          <span className="hero-line i-3 block font-bold text-[4.2rem] md:text-[5rem]">
+            WITH
+          </span>
+          <span className="hero-line i-4 block mt-2 font-extrabold bg-gradient-to-r from-[#1E5AFF] to-[#00B3FF] bg-clip-text text-transparent text-[5rem] md:text-[6rem] drop-shadow-[0_2px_6px_rgba(30,90,255,0.2)]">
             CLARITY
           </span>
         </h1>
@@ -182,7 +220,10 @@ const HeroSection = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button
-            onClick={() => setShowDownloadModal(true)}
+            onClick={() => {
+              // Unified CTA behavior (Option A): direct download of latest developer .zip
+              void downloadExtensionZip();
+            }}
             className="bg-[#1E5AFF] text-white hover:bg-[#0047D1] rounded-full px-6 md:px-8 py-4 md:py-6 text-base md:text-lg flex items-center gap-2 transition-transform duration-200 hover:scale-105"
           >
             <Chrome className="w-5 h-5" />
@@ -280,11 +321,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Download Modal */}
-      <DownloadModal
-        isOpen={showDownloadModal}
-        onClose={() => setShowDownloadModal(false)}
-      />
+      {/* Modal removed: CTAs now perform direct download (no pop-ups) */}
     </section>
   );
 };
