@@ -193,6 +193,66 @@ All colors MUST be HSL.
     transform: translateY(-8px);
     box-shadow: var(--shadow-primary);
   }
+
+  /* Hero gradient + glow for "CLARITY" */
+  .hero-clarity-gradient {
+    background: linear-gradient(90deg, var(--color-primary) 10%, var(--color-accent) 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+  .hero-clarity {
+    position: relative;
+    display: inline-block; /* ensure any effects are text-bound */
+    /* Subtle, text-bound halo using multi-layer text-shadow (hugging glyphs) */
+    text-shadow: 0 0 10px rgba(30, 90, 255, 0.22), 0 0 20px rgba(0, 179, 255, 0.16);
+  }
+
+  /* Platform primary button (premium pill) */
+  .btn-platform-primary {
+    border-radius: 9999px; /* fully pill */
+    background: var(--color-primary);
+    color: white;
+    position: relative;
+    box-shadow: 0 6px 16px rgba(30,90,255,0.28), 0 2px 6px rgba(30,90,255,0.22);
+    transition: background-color 180ms ease, box-shadow 180ms ease, transform 120ms ease;
+  }
+  .btn-platform-primary:hover {
+    background: var(--color-primary);
+    box-shadow: 0 8px 22px rgba(30,90,255,0.30), 0 3px 8px rgba(30,90,255,0.24);
+  }
+  .btn-platform-primary:active {
+    background: var(--color-primary-hover);
+    box-shadow: 0 4px 12px rgba(30,90,255,0.22), 0 1px 4px rgba(30,90,255,0.18);
+    transform: translateY(0.5px);
+  }
+  .btn-platform-primary[disabled],
+  .btn-platform-primary[aria-disabled="true"] {
+    opacity: 0.6;
+    box-shadow: none;
+    cursor: not-allowed;
+  }
+  .btn-platform-primary::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.14), rgba(255,255,255,0));
+    mix-blend-mode: screen;
+  }
+  .btn-platform-primary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: inset 0 0 0 1px rgba(0,179,255,0.10);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-platform-primary { transition: none; }
+  }
 }
 
 @layer keyframes {

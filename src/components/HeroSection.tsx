@@ -197,41 +197,47 @@ const HeroSection = () => {
       />
 
       {/* Hero content */}
-      <div className="container mx-auto text-center max-w-4xl relative z-10">
-        <h1 className="leading-[1.1] tracking-tight mb-8" data-hero={heroAttr}>
-          <span className="hero-line i-1 block font-bold text-[4.2rem] md:text-[5rem]">
-            CHEAT ON EVERY
+      <div className="container mx-auto text-center max-w-4xl md:max-w-5xl relative z-10">
+        {/* Type scale adjustments: calmer, premium; see sizes below */}
+        <h1 className="leading-tight tracking-tight mb-6 md:mb-7" data-hero={heroAttr}>
+          <span className="hero-line i-1 block font-semibold tracking-normal text-[clamp(1.9rem,3.2vw,3.25rem)]">
+            CHEAT&nbsp;ON&nbsp;EVERY
           </span>
-          <span className="hero-line i-2 block font-bold text-[4.2rem] md:text-[5rem] mt-1">
+          <span className="hero-line i-2 block font-semibold tracking-normal text-[clamp(1.9rem,3.2vw,3.25rem)] mt-1">
             MEETING
           </span>
-          <span className="hero-line i-3 block font-bold text-[4.2rem] md:text-[5rem]">
+          <span className="hero-line i-3 block font-semibold tracking-normal text-[clamp(1.9rem,3.2vw,3.25rem)]">
             WITH
           </span>
-          <span className="hero-line i-4 block mt-2 font-extrabold bg-gradient-to-r from-[#1E5AFF] to-[#00B3FF] bg-clip-text text-transparent text-[5rem] md:text-[6rem] drop-shadow-[0_2px_6px_rgba(30,90,255,0.2)]">
+          {/* Restore CLARITY scale close to original while staying responsive */}
+          <span className="hero-line i-4 hero-clarity hero-clarity-gradient block mt-2 font-bold tracking-tight text-[clamp(3.2rem,6vw,5.5rem)] md:text-[clamp(3.6rem,6.5vw,6rem)]">
             CLARITY
           </span>
         </h1>
 
-        <p className="text-lg sm:text-xl md:text-2xl text-[#444A52] leading-8 mb-10 max-w-3xl mx-auto">
-          Crafting intelligent solutions that turn your wildest interview dreams
-          into reality.
+        <p className="text-base md:text-lg text-[var(--color-muted)] leading-relaxed mt-4 md:mt-5 max-w-[60ch] md:max-w-[56ch] mx-auto px-2">
+          Crafting intelligent solutions that turn your wildest interview dreams into reality.
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <div
+          data-cta-group
+          className="flex flex-col md:flex-row justify-center items-center gap-y-3 md:gap-y-0 md:gap-x-4 mt-3 md:mt-4 mb-3 md:mb-4"
+        >
           <Button
             onClick={() => {
               // Unified CTA behavior (Option A): direct download of latest developer .zip
               void downloadExtensionZip();
             }}
-            className="bg-[#1E5AFF] text-white hover:bg-[#0047D1] rounded-full px-6 md:px-8 py-4 md:py-6 text-base md:text-lg flex items-center gap-2 transition-transform duration-200 hover:scale-105"
+            variant="platformPrimary"
+            size="lg"
+            className="px-6 md:px-8 py-4 md:py-6 text-base md:text-lg"
           >
             <Chrome className="w-5 h-5" />
             Download Extension
           </Button>
           <Button
             variant="outline"
-            className="border border-[#1E5AFF] text-[#1E5AFF] hover:bg-[#E8F0FF] rounded-full px-6 md:px-8 py-4 md:py-6 text-base md:text-lg"
+            className="border border-[#1E5AFF] text-[#1E5AFF] hover:bg-[#E8F0FF] rounded-full px-6 md:px-8 py-4 md:py-6 text-base md:text-lg focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2"
           >
             Get started ✨
           </Button>
