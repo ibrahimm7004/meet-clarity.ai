@@ -85,10 +85,18 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  body {
+  html, body {
     @apply text-foreground font-sans antialiased;
-    /* Remove solid background color and gradient image */
-    background: transparent;
+    background-image: url('https://cluely.com/images/pages/home/background@2x.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-color: transparent !important;
+  }
+  
+  #root {
+    background: transparent !important;
   }
   
   /* Custom scrollbar */
@@ -233,5 +241,31 @@ All colors MUST be HSL.
     0% { transform: translate3d(0, 0, 0) scale(1); }
     50% { transform: translate3d(-100px, 90px, 0) scale(1.15); }
     100% { transform: translate3d(0, 0, 0) scale(1); }
+  }
+  
+  /* Blurred border effect */
+  .blurred-border {
+    background: transparent;
+    backdrop-filter: blur(10px);
+    border-radius: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    opacity: 0.6;
+    pointer-events: none;
+  }
+  
+  /* Blue gradient button (matching CLARITY text) */
+  .purple-gradient-button {
+    background: linear-gradient(135deg, #1E5AFF 0%, #00B3FF 100%) !important;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .purple-gradient-button:hover {
+    background: linear-gradient(135deg, #0047D1 0%, #0099E6 100%) !important;
+  }
+  
+  .purple-gradient-button > *:not(.blurred-border):not([class*="blur"]) {
+    position: relative;
+    z-index: 30;
   }
 }
