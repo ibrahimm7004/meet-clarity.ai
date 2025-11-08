@@ -243,7 +243,7 @@ const Enterprise = () => {
 
       {/* Everything Section */}
       <section className="py-16 px-4">
-        <div className="container mx-auto max-w-6xl">
+        <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
               Everything about your company
@@ -253,11 +253,49 @@ const Enterprise = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
             {features.map((feature, index) => (
               <div key={index} className="space-y-4">
-                <div className="bg-gradient-to-br from-primary/10 to-purple-400/10 rounded-xl aspect-square flex items-center justify-center">
-                  <p className="text-sm font-semibold text-muted-foreground">{feature.image}</p>
+                <div className="pointer-events-none aspect-[320/306] rounded-[16px] bg-[radial-gradient(92.09%_126.39%_at_50%_100%,#DDE2EE_58.91%,#BBC5DD_100%)] p-[15px] md:aspect-[316/302] md:rounded-[22px] md:p-5 lg:aspect-[426/406] lg:rounded-[18px] lg:p-3 xl:rounded-[24px] xl:p-6 flex items-center justify-center overflow-hidden">
+                  {feature.image === "grid" ? (
+                    <img
+                      loading="lazy"
+                      width="378"
+                      height="358"
+                      decoding="async"
+                      className="rounded-[9px] md:rounded-[11px] lg:rounded-[9px] w-full h-full object-cover"
+                      srcSet="https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffeature-1.0cf09c8d.jpg&w=384&q=100 1x, https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffeature-1.0cf09c8d.jpg&w=828&q=100 2x"
+                      src="https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffeature-1.0cf09c8d.jpg&w=828&q=100"
+                      alt="Company knowledge base"
+                      style={{ color: 'transparent' }}
+                    />
+                  ) : feature.image === "settings" ? (
+                    <img
+                      loading="lazy"
+                      width="378"
+                      height="358"
+                      decoding="async"
+                      className="rounded-[9px] md:rounded-[11px] lg:rounded-[9px] w-full h-full object-cover"
+                      srcSet="https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffeature-2.0adb91d9.jpg&w=384&q=100 1x, https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffeature-2.0adb91d9.jpg&w=828&q=100 2x"
+                      src="https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffeature-2.0adb91d9.jpg&w=828&q=100"
+                      alt="Team-level settings & permissions"
+                      style={{ color: 'transparent' }}
+                    />
+                  ) : feature.image === "chart" ? (
+                    <img
+                      loading="lazy"
+                      width="378"
+                      height="358"
+                      decoding="async"
+                      className="rounded-[9px] md:rounded-[11px] lg:rounded-[9px] w-full h-full object-cover"
+                      srcSet="https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffeature-3.81927191.jpg&w=384&q=100 1x, https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffeature-3.81927191.jpg&w=828&q=100 2x"
+                      src="https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffeature-3.81927191.jpg&w=828&q=100"
+                      alt="AI meeting analytics"
+                      style={{ color: 'transparent' }}
+                    />
+                  ) : (
+                    <p className="text-sm font-semibold text-muted-foreground">{feature.image}</p>
+                  )}
                 </div>
                 <div>
                   <h3 className="text-lg font-bold mb-2">{feature.title}</h3>

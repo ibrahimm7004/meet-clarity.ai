@@ -39,33 +39,33 @@ const Header = () => {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-1">
-            <img src={clarityLogo} alt="Clarity Logo" className="h-6 w-6 md:h-8 md:w-8 brightness-0 invert" />
-            <span className="text-lg md:text-xl font-semibold text-white">Clarity</span>
+            <img src={clarityLogo} alt="Clarity Logo" className="h-6 w-6 md:h-8 md:w-8" />
+            <span className="text-lg md:text-xl font-semibold text-foreground">Clarity</span>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             <a 
               href="#pricing"
-              className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-white focus:underline"
+              className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-foreground focus:underline"
             >
               Pricing
             </a>
             <Link 
               to="/enterprise"
-              className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-white focus:underline"
+              className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-foreground focus:underline"
             >
               Enterprise
             </Link>
             <a 
               href="#contact"
-              className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-white focus:underline"
+              className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-foreground focus:underline"
             >
               Careers
             </a>
             <a 
               href="#contact"
-              className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-white focus:underline"
+              className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-foreground focus:underline"
             >
               Blog
             </a>
