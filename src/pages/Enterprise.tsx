@@ -14,6 +14,7 @@ import {
   Database,
   ChevronDown
 } from "lucide-react";
+import clarityLogo from "/favicon.png";
 
 const Enterprise = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -49,19 +50,23 @@ const Enterprise = () => {
   const dashboardFeatures = [
     {
       title: "AI meeting summaries",
-      description: "Every meeting neatly summarized — no effort needed."
+      description: "Every meeting neatly summarized — no effort needed.",
+      image: "https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdashboard-1.cb0cfb17.png&w=3840&q=100"
     },
     {
       title: "Usage analytics",
-      description: "See when and how reps are using Clarity effectively across calls."
+      description: "See when and how reps are using Clarity effectively across calls.",
+      image: "https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdashboard-2.c70de35b.png&w=3840&q=100"
     },
     {
       title: "AI meeting coaching",
-      description: "Identify moments where Clarity could've helped but wasn't used."
+      description: "Identify moments where Clarity could've helped but wasn't used.",
+      image: "https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdashboard-3.d5bb8264.png&w=3840&q=100"
     },
     {
       title: "Cross-call AI chat",
-      description: "Clarity answers questions across all your meetings using saved context."
+      description: "Clarity answers questions across all your meetings using saved context.",
+      image: "https://cluely.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdashboard-4.e7ed4c1f.png&w=3840&q=100"
     }
   ];
 
@@ -211,31 +216,65 @@ const Enterprise = () => {
 
       {/* Dashboard Features */}
       <section className="py-16 px-4 bg-muted/30">
-        <div className="container mx-auto max-w-6xl">
+        <div className="container mx-auto max-w-7xl">
           <div className="grid md:grid-cols-2 gap-8 items-center mb-16">
-            <div className="bg-gradient-to-br from-primary/10 to-purple-400/10 rounded-2xl aspect-video flex items-center justify-center">
-              <div className="text-center p-8">
-                <p className="text-lg font-semibold text-muted-foreground">Dashboard Preview</p>
-              </div>
+            {/* Image Preview */}
+            <div className="rounded-2xl aspect-video flex items-center justify-center overflow-hidden bg-muted/50">
+              {dashboardFeatures[activeTab].image ? (
+                <img
+                  src={dashboardFeatures[activeTab].image}
+                  srcSet={`${dashboardFeatures[activeTab].image.replace('w=3840', 'w=1920')} 1x, ${dashboardFeatures[activeTab].image} 2x`}
+                  alt={dashboardFeatures[activeTab].title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : (
+                <div className="text-center p-8">
+                  <p className="text-lg font-semibold text-muted-foreground">Dashboard Preview</p>
+                </div>
+              )}
             </div>
+            
+            {/* Options List */}
             <div>
-              <div className="flex gap-2 mb-6">
-                {dashboardFeatures.map((_, index) => (
+              <div className="space-y-4">
+                {dashboardFeatures.map((feature, index) => (
                   <button
                     key={index}
                     onClick={() => setActiveTab(index)}
-                    className={`h-1 flex-1 rounded-full transition-all ${
-                      activeTab === index ? 'bg-primary' : 'bg-muted'
-                    }`}
-                  />
+                    className="w-full text-left group"
+                  >
+                    <div className="flex items-center gap-4">
+                      {/* Line/Button indicator */}
+                      <div
+                        className={`h-1 flex-shrink-0 rounded-full transition-all ${
+                          activeTab === index
+                            ? 'bg-primary w-12'
+                            : 'bg-muted w-8 group-hover:w-10'
+                        }`}
+                      />
+                      {/* Content */}
+                      <div className="flex-1">
+                        <h3
+                          className={`text-lg font-semibold mb-1 transition-colors ${
+                            activeTab === index
+                              ? 'text-foreground'
+                              : 'text-muted-foreground group-hover:text-foreground/80'
+                          }`}
+                        >
+                          {feature.title}
+                        </h3>
+                        {activeTab === index && (
+                          <p className="text-sm text-muted-foreground">
+                            {feature.description}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  </button>
                 ))}
               </div>
-              <h3 className="text-2xl font-bold mb-3">
-                {dashboardFeatures[activeTab].title}
-              </h3>
-              <p className="text-muted-foreground">
-                {dashboardFeatures[activeTab].description}
-              </p>
             </div>
           </div>
         </div>
