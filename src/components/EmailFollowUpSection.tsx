@@ -1,7 +1,10 @@
-import { Mail, Clock, TrendingUp, AlertCircle, CheckCircle, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { Mail, Clock, TrendingUp, AlertCircle, CheckCircle, ArrowRight, ChevronDown, BarChart3, MessageSquare, Target } from "lucide-react";
 import { Card } from "@/components/ui/card";
 
 const EmailFollowUpSection = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <section id="email-followup" className="py-16 md:py-24 lg:py-32 px-4 bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto">
@@ -189,10 +192,157 @@ const EmailFollowUpSection = () => {
                 </p>
               </div>
 
+              {/* Expanded Full Analysis Content */}
+              {isExpanded && (
+                <div className="pt-6 border-t border-border/50 space-y-6 animate-fade-in">
+                  {/* Detailed Breakdown */}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <BarChart3 className="w-6 h-6 text-primary" />
+                      <h4 className="text-xl font-bold text-foreground">Detailed Performance Breakdown</h4>
+                    </div>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="bg-muted/30 rounded-lg p-4">
+                        <p className="font-semibold text-foreground mb-2">Communication Score</p>
+                        <div className="flex items-center gap-2">
+                          <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
+                            <div className="h-full bg-green-500 rounded-full" style={{ width: '88%' }}></div>
+                          </div>
+                          <span className="text-sm font-bold text-foreground">88%</span>
+                        </div>
+                      </div>
+                      <div className="bg-muted/30 rounded-lg p-4">
+                        <p className="font-semibold text-foreground mb-2">Technical Knowledge</p>
+                        <div className="flex items-center gap-2">
+                          <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
+                            <div className="h-full bg-blue-500 rounded-full" style={{ width: '92%' }}></div>
+                          </div>
+                          <span className="text-sm font-bold text-foreground">92%</span>
+                        </div>
+                      </div>
+                      <div className="bg-muted/30 rounded-lg p-4">
+                        <p className="font-semibold text-foreground mb-2">Problem Solving</p>
+                        <div className="flex items-center gap-2">
+                          <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
+                            <div className="h-full bg-purple-500 rounded-full" style={{ width: '85%' }}></div>
+                          </div>
+                          <span className="text-sm font-bold text-foreground">85%</span>
+                        </div>
+                      </div>
+                      <div className="bg-muted/30 rounded-lg p-4">
+                        <p className="font-semibold text-foreground mb-2">Cultural Fit</p>
+                        <div className="flex items-center gap-2">
+                          <div className="flex-1 h-2 bg-muted rounded-full overflow-hidden">
+                            <div className="h-full bg-orange-500 rounded-full" style={{ width: '90%' }}></div>
+                          </div>
+                          <span className="text-sm font-bold text-foreground">90%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Additional Missed Opportunities */}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <Target className="w-6 h-6 text-orange-600" />
+                      <h4 className="text-xl font-bold text-foreground">Additional Improvement Areas</h4>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="bg-orange-50/50 dark:bg-orange-950/10 rounded-lg p-4 border border-orange-200 dark:border-orange-800/50">
+                        <p className="font-semibold text-foreground mb-2">
+                          💡 Could have asked more clarifying questions
+                        </p>
+                        <p className="text-sm text-foreground/70">
+                          When discussing the project requirements, asking about specific constraints or preferences would have shown deeper engagement.
+                        </p>
+                      </div>
+                      <div className="bg-orange-50/50 dark:bg-orange-950/10 rounded-lg p-4 border border-orange-200 dark:border-orange-800/50">
+                        <p className="font-semibold text-foreground mb-2">
+                          💡 Opportunity to discuss testing strategies
+                        </p>
+                        <p className="text-sm text-foreground/70">
+                          The interviewer mentioned quality assurance but you didn't elaborate on your testing experience with Jest, React Testing Library, or E2E tools.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Conversation Highlights */}
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-2">
+                      <MessageSquare className="w-6 h-6 text-primary" />
+                      <h4 className="text-xl font-bold text-foreground">Key Conversation Moments</h4>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="bg-primary/5 rounded-lg p-4 border border-primary/20">
+                        <p className="text-sm font-medium text-foreground mb-1">00:12:34</p>
+                        <p className="text-foreground/80">
+                          <span className="font-semibold">Interviewer:</span> "How do you handle state management in large React applications?"
+                        </p>
+                        <p className="text-foreground/80 mt-2">
+                          <span className="font-semibold">You:</span> "I use Redux for global state and Context API for component-level state. Redux is great for complex state logic..."
+                        </p>
+                        <p className="text-sm text-green-600 dark:text-green-400 mt-2">
+                          ✓ Strong answer - demonstrated deep understanding
+                        </p>
+                      </div>
+                      <div className="bg-orange-50/50 dark:bg-orange-950/10 rounded-lg p-4 border border-orange-200 dark:border-orange-800/50">
+                        <p className="text-sm font-medium text-foreground mb-1">00:18:45</p>
+                        <p className="text-foreground/80">
+                          <span className="font-semibold">Interviewer:</span> "What's your experience with TypeScript?"
+                        </p>
+                        <p className="text-foreground/80 mt-2">
+                          <span className="font-semibold">You:</span> "I've used PropTypes for type checking..."
+                        </p>
+                        <p className="text-sm text-orange-600 dark:text-orange-400 mt-2">
+                          ⚠️ Missed opportunity - should have mentioned TypeScript experience
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Additional Recommendations */}
+                  <div className="space-y-4">
+                    <h4 className="text-xl font-bold text-foreground">Extended Recommendations</h4>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div className="bg-blue-50/50 dark:bg-blue-950/10 rounded-lg p-4 border border-blue-200 dark:border-blue-800/50">
+                        <p className="font-semibold text-foreground mb-2">📚 Study Resources</p>
+                        <ul className="text-sm text-foreground/70 space-y-1">
+                          <li>• Review Next.js 13+ App Router documentation</li>
+                          <li>• Practice TypeScript advanced types</li>
+                          <li>• Study TechCorp's engineering blog</li>
+                        </ul>
+                      </div>
+                      <div className="bg-purple-50/50 dark:bg-purple-950/10 rounded-lg p-4 border border-purple-200 dark:border-purple-800/50">
+                        <p className="font-semibold text-foreground mb-2">💼 Portfolio Updates</p>
+                        <ul className="text-sm text-foreground/70 space-y-1">
+                          <li>• Add TypeScript examples to your portfolio</li>
+                          <li>• Highlight SSR/SSG projects</li>
+                          <li>• Include testing case studies</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* CTA Button */}
               <div className="text-center pt-4">
-                <button className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-transform shadow-lg">
-                  View Full Analysis
+                <button 
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="bg-primary text-primary-foreground px-8 py-3 rounded-lg font-semibold hover:scale-105 transition-transform shadow-lg flex items-center gap-2 mx-auto"
+                >
+                  {isExpanded ? (
+                    <>
+                      View Less
+                      <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} />
+                    </>
+                  ) : (
+                    <>
+                      View Full Analysis
+                      <ChevronDown className="w-4 h-4 transition-transform duration-200" />
+                    </>
+                  )}
                 </button>
               </div>
             </div>

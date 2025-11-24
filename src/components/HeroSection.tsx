@@ -48,17 +48,10 @@ const HeroSection = () => {
               onClick={() => setShowDownloadModal(true)}
               className="purple-gradient-button rounded-[10px] flex items-center gap-[6px] w-fit text-white font-medium text-[16px] tracking-[-0.13px] p-[10px_20px] relative overflow-hidden"
             >
-              <span style={{ opacity: 1, transform: 'none' }} className="relative z-30">Get the desktop app</span>
+              <span style={{ opacity: 1, transform: 'none' }} className="relative z-30">Get Extension</span>
               <span className="absolute top-0 left-0 z-10 h-full w-full blur-[1px] rounded-[10px] pointer-events-none opacity-30"></span>
               <span className="blurred-border absolute -top-px -left-px z-10 h-full w-full rounded-[10px] pointer-events-none"></span>
             </button>
-          </div>
-        </div>
-
-        {/* Demo/Preview Section - Placeholder for now */}
-        <div className="mt-16 md:mt-24 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-muted/30 text-sm text-foreground/60">
-            Demo
           </div>
         </div>
       </div>

@@ -16,17 +16,6 @@ const Footer = () => {
             <p className="text-sm sm:text-base text-foreground/70 mb-4 md:mb-6 max-w-md">
               Clarity-powered interview assistant that helps you ace every interview and land your dream job.
             </p>
-            <div className="flex space-x-4 sm:space-x-6">
-              <a href="#" className="text-sm sm:text-base text-foreground/60 hover:text-foreground transition-colors">
-                Twitter
-              </a>
-              <a href="#" className="text-sm sm:text-base text-foreground/60 hover:text-foreground transition-colors">
-                LinkedIn
-              </a>
-              <a href="#" className="text-sm sm:text-base text-foreground/60 hover:text-foreground transition-colors">
-                GitHub
-              </a>
-            </div>
           </div>
 
           {/* Product */}

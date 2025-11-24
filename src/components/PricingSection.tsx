@@ -1,15 +1,23 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { 
   Check, 
-  Star, 
   Zap, 
   Crown,
   Shield
 } from "lucide-react";
 
 const PricingSection = () => {
+  const navigate = useNavigate();
+  
   const plans = [
     {
       name: "Free",
@@ -65,27 +73,31 @@ const PricingSection = () => {
     return { amount: savedAmount, percentage };
   };
 
+  const faqs = [
+    {
+      question: "What happens after the free trial?",
+      answer: "Your free trial gives you full access to all Pro features for 7 days. You can cancel anytime during the trial with no charges."
+    },
+    {
+      question: "Can I switch between plans?",
+      answer: "Yes! You can upgrade or downgrade your plan at any time. Changes take effect immediately with prorated billing."
+    },
+    {
+      question: "Is my interview data secure?",
+      answer: "Absolutely. We use enterprise-grade encryption and never store personal interview content. Your privacy is our top priority."
+    }
+  ];
+
   return (
     <section id="pricing" className="py-16 md:py-24 px-4">
       <div className="container mx-auto">
-        <div className="text-center mb-12 md:mb-16">
+        <div className="text-center mb-6 md:mb-8">
           <Badge variant="secondary" className="mb-3 md:mb-4 text-xs sm:text-sm">
             Simple Pricing
           </Badge>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 text-foreground px-4">
             Choose Your Success Plan
           </h2>
-          <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-6 md:mb-8 px-4">
-            Start with a 7-day free trial. No credit card required. 
-            Cancel anytime with just one click. Continue with us after getting the job 
-            for ongoing meeting management and task scheduling.
-          </p>
-          
-          {/* Free Trial Highlight */}
-          <div className="inline-flex items-center space-x-2 bg-success/10 border border-success/20 rounded-full px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base">
-            <Star className="w-4 h-4 sm:w-5 sm:h-5 text-success flex-shrink-0" />
-            <span className="text-success font-medium">7-Day Free Trial • No Credit Card Required</span>
-          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
@@ -195,6 +207,15 @@ const PricingSection = () => {
                     <Button 
                       className="w-full"
                       size="lg"
+                      onClick={() => {
+                        if (plan.name === "Free") {
+                          // Handle free plan download
+                          window.location.href = "#";
+                        } else {
+                          // Navigate to checkout with plan and billing info
+                          navigate(`/checkout?plan=${plan.name.toLowerCase()}&billing=monthly`);
+                        }
+                      }}
                     >
                       {plan.name === "Free" ? "Download Now" : "Subscribe Now"}
                     </Button>
@@ -214,31 +235,20 @@ const PricingSection = () => {
         </div>
 
         {/* FAQ Section */}
-        <div className="mt-12 md:mt-16 max-w-3xl mx-auto">
-          <h3 className="text-xl sm:text-2xl font-bold text-center mb-6 md:mb-8 px-4">Frequently Asked Questions</h3>
-          <div className="grid gap-4 sm:gap-6">
-            <Card className="p-4 sm:p-5 md:p-6">
-              <h4 className="font-semibold mb-2 text-sm sm:text-base">What happens after the free trial?</h4>
-              <p className="text-muted-foreground text-xs sm:text-sm">
-                Your free trial gives you full access to all Pro features for 7 days. 
-                You can cancel anytime during the trial with no charges.
-              </p>
-            </Card>
-            <Card className="p-6">
-              <h4 className="font-semibold mb-2">Can I switch between plans?</h4>
-              <p className="text-muted-foreground text-sm">
-                Yes! You can upgrade or downgrade your plan at any time. 
-                Changes take effect immediately with prorated billing.
-              </p>
-            </Card>
-            <Card className="p-6">
-              <h4 className="font-semibold mb-2">Is my interview data secure?</h4>
-              <p className="text-muted-foreground text-sm">
-                Absolutely. We use enterprise-grade encryption and never store 
-                personal interview content. Your privacy is our top priority.
-              </p>
-            </Card>
-          </div>
+        <div id="faq" className="mt-12 md:mt-16 max-w-3xl mx-auto">
+          <h3 className="text-[28px] leading-snug font-medium tracking-tight text-foreground font-sans text-center md:text-4xl md:text-[32px] lg:mb-[16px] lg:text-[40px] xl:mb-[24px] px-4">Frequently asked questions</h3>
+          <Accordion type="single" collapsible className="w-full">
+            {faqs.map((faq, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-b">
+                <AccordionTrigger className="flex flex-1 items-center justify-between rounded py-4 text-[18px] leading-snug font-medium tracking-tight text-pretty md:text-xl md:text-[20px] md:leading-[1.125] lg:text-[24px] transition-all [&[data-state=open]>svg]:rotate-180 gap-x-4 text-left text-foreground hover:text-foreground/80 hover:no-underline sm:py-4 md:py-[19px] lg:py-5 [&_svg]:size-7">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground text-xs sm:text-sm">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </div>
     </section>

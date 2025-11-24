@@ -46,28 +46,22 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             <a 
+              href="#features"
+              className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-foreground focus:underline"
+            >
+              Features
+            </a>
+            <a 
               href="#pricing"
               className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-foreground focus:underline"
             >
               Pricing
             </a>
-            <Link 
-              to="/enterprise"
-              className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-foreground focus:underline"
-            >
-              Enterprise
-            </Link>
             <a 
-              href="#contact"
+              href="#faq"
               className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-foreground focus:underline"
             >
-              Careers
-            </a>
-            <a 
-              href="#contact"
-              className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-foreground focus:underline"
-            >
-              Blog
+              FAQ
             </a>
           </nav>
 
@@ -90,9 +84,11 @@ const Header = () => {
             ) : (
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className={`purple-gradient-button rounded-[10px] items-center gap-[6px] w-fit text-white font-medium text-[16px] tracking-[-0.13px] p-[10px_20px] relative hidden overflow-hidden ${scrolled ? 'sm:flex' : ''}`}
+                className={`purple-gradient-button rounded-[10px] flex items-center gap-[6px] w-fit text-white font-medium text-[16px] tracking-[-0.13px] p-[10px_20px] relative overflow-hidden transition-opacity duration-300 ${
+                  scrolled ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                }`}
               >
-                <span style={{ opacity: 1, transform: 'none' }} className="relative z-30">Get the desktop app</span>
+                <span style={{ opacity: 1, transform: 'none' }} className="relative z-30">Get Extension</span>
                 <span className="absolute top-0 left-0 z-10 h-full w-full blur-[1px] rounded-[10px] pointer-events-none opacity-30"></span>
                 <span className="blurred-border absolute -top-px -left-px z-10 h-full w-full rounded-[10px] pointer-events-none"></span>
               </button>
@@ -131,32 +127,25 @@ const Header = () => {
         {mobileMenuOpen && (
           <div className="md:hidden border-t border-border/50 py-4 space-y-3">
             <a 
+              href="#features"
+              className="block text-foreground/70 hover:text-foreground transition-colors text-sm font-medium"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Features
+            </a>
+            <a 
               href="#pricing"
               className="block text-foreground/70 hover:text-foreground transition-colors text-sm font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
               Pricing
             </a>
-            <Link 
-              to="/enterprise"
-              className="block text-foreground/70 hover:text-foreground transition-colors text-sm font-medium"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Enterprise
-            </Link>
             <a 
-              href="#contact"
+              href="#faq"
               className="block text-foreground/70 hover:text-foreground transition-colors text-sm font-medium"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Careers
-            </a>
-            <a 
-              href="#contact"
-              className="block text-foreground/70 hover:text-foreground transition-colors text-sm font-medium"
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Blog
+              FAQ
             </a>
             {!user && (
               <button
@@ -166,7 +155,7 @@ const Header = () => {
                 }}
                 className="w-full purple-gradient-button rounded-[10px] flex items-center justify-center gap-[6px] text-white font-medium text-[16px] tracking-[-0.13px] p-[10px_20px] relative overflow-hidden mt-2"
               >
-                <span style={{ opacity: 1, transform: 'none' }} className="relative z-30">Get the desktop app</span>
+                <span style={{ opacity: 1, transform: 'none' }} className="relative z-30">Get Extension</span>
                 <span className="absolute top-0 left-0 z-10 h-full w-full blur-[1px] rounded-[10px] pointer-events-none opacity-30"></span>
                 <span className="blurred-border absolute -top-px -left-px z-10 h-full w-full rounded-[10px] pointer-events-none"></span>
               </button>
