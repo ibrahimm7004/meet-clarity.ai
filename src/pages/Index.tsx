@@ -21,11 +21,11 @@ const Index = () => {
   }, []);
 
   // Calculate opacity based on scroll position
-  // Stage 1: Starts fading at 600px (when button appears), subtle fade to 40% at 1200px
-  // Stage 2: Continues to full white (100%) at 2500px
+  // Stage 1: Starts fading at 600px (when button appears), subtle fade to 40% at 900px
+  // Stage 2: Continues to full white (100%) at 1500px
   const fadeStart = 600;
-  const fadeMid = 1200;
-  const fadeEnd = 2500;
+  const fadeMid = 900;
+  const fadeEnd = 1500;
   
   let opacity = 0;
   if (scrollY >= fadeStart && scrollY <= fadeMid) {

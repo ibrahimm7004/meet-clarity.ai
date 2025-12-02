@@ -1,10 +1,8 @@
-import { Link } from "react-router-dom";
-
 const Footer = () => {
   return (
     <footer id="contact" className="bg-card border-t border-border/50 py-12 md:py-16 px-4">
       <div className="container mx-auto">
-        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
           {/* Brand */}
           <div className="sm:col-span-2">
             <div className="flex items-center space-x-2 mb-4 md:mb-6">
@@ -40,22 +38,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Legal */}
-          <div>
-            <h3 className="font-bold mb-3 md:mb-4 text-foreground text-sm sm:text-base">Legal</h3>
-            <ul className="space-y-2 sm:space-y-3">
-              <li>
-                <a href="#" className="text-sm text-foreground/70 hover:text-foreground transition-colors">
-                  Privacy Policy
-                </a>
-              </li>
-              <li>
-                <Link to="/terms" className="text-sm text-foreground/70 hover:text-foreground transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
-            </ul>
-          </div>
         </div>
 
         <div className="border-t border-border/30 mt-8 md:mt-12 pt-6 md:pt-8 text-center text-foreground/60">

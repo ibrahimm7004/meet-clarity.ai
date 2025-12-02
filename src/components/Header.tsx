@@ -33,6 +33,21 @@ const Header = () => {
     navigate("/");
   };
 
+  const handleFaqClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const faqElement = document.getElementById('faq');
+    if (faqElement) {
+      const headerHeight = 80; // Account for sticky header
+      const elementPosition = faqElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+      
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 bg-transparent backdrop-blur-sm">
       <div className="container mx-auto px-4 md:px-6">
@@ -59,6 +74,7 @@ const Header = () => {
             </a>
             <a 
               href="#faq"
+              onClick={handleFaqClick}
               className="flex items-center justify-center px-3.5 py-2 text-sm font-medium text-foreground focus:underline"
             >
               FAQ
@@ -142,8 +158,11 @@ const Header = () => {
             </a>
             <a 
               href="#faq"
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                handleFaqClick(e);
+              }}
               className="block text-foreground/70 hover:text-foreground transition-colors text-sm font-medium"
-              onClick={() => setMobileMenuOpen(false)}
             >
               FAQ
             </a>

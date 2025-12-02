@@ -201,9 +201,6 @@ const PricingSection = () => {
 
                   {/* Free Trial & CTA */}
                   <div className="space-y-2 pt-2">
-                    <p className="text-xs text-muted-foreground text-center h-[20px]">
-                      {plan.name !== "Free" ? "7-Day Free Trial" : " "}
-                    </p>
                     <Button 
                       className="w-full"
                       size="lg"
@@ -235,8 +232,8 @@ const PricingSection = () => {
         </div>
 
         {/* FAQ Section */}
-        <div id="faq" className="mt-12 md:mt-16 max-w-3xl mx-auto">
-          <h3 className="text-[28px] leading-snug font-medium tracking-tight text-foreground font-sans text-center md:text-4xl md:text-[32px] lg:mb-[16px] lg:text-[40px] xl:mb-[24px] px-4">Frequently asked questions</h3>
+        <div id="faq" className="mt-12 md:mt-16 max-w-3xl mx-auto scroll-mt-24 md:scroll-mt-28">
+          <h3 className="text-[28px] leading-snug font-medium tracking-tight text-foreground font-sans text-center md:text-4xl md:text-[32px] lg:mb-[16px] lg:text-[40px] xl:mb-[24px] px-4 relative z-10">Frequently asked questions</h3>
           <Accordion type="single" collapsible className="w-full">
             {faqs.map((faq, index) => (
               <AccordionItem key={index} value={`item-${index}`} className="border-b">
